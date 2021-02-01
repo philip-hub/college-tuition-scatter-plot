@@ -5,11 +5,17 @@ import matplotlib.pyplot as plt
 from pylab import *
 import tkinter as tk
 from tkinter import filedialog
+from scipy.optimize import curve_fit
 
 root = tk.Tk()
 
 canvas1 = tk.Canvas(root, width=400, height=400, bg='lemon chiffon', relief='raised') #creates the tkinker window
 canvas1.pack()
+
+
+def func_exp(x, a, b, c):
+    c = 16
+    return a * (b ** x) + c
 
 def caculate():
     FilePath = filedialog.askopenfilename()
@@ -81,6 +87,17 @@ def caculate():
     plt.ylabel('closing price adjusted')
     print(np.unique(x))#prints the years in the best fit line
     print(np.poly1d(np.polyfit(x, y, 1))(np.unique(x)))#prints the cost in the best fit line
+
+
+
+    x_data = np.array(x)
+    y_data = np.array(y)
+
+    popt, pcov = curve_fit(func_exp, x_data, y_data, p0=(1500, 0.01, 7500))
+    print(popt)
+
+    plt.plot(x_data, func_exp(x_data, *popt), color='xkcd:teal')
+
     plt.show()
 
 browseButton_CSV  =  tk.Button(text=" Import CSV File", command=caculate, bg='green', fg='white',
