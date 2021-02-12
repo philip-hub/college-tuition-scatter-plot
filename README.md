@@ -10,3 +10,5 @@ All thats needed is a .csv file with your favorite college's past pricing data.
 Here is a link to a data base for [Havard](https://www.kaggle.com/harvard-university/harvard-tuition)
 - Please delete the text column and make sure the 1st row is the year and the second row is the tuition cost.
 
+Also the stock scatterplot is set up for the yahoo finance the user must delete the first text row
+
